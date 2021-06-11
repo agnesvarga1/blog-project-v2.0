@@ -1,0 +1,47 @@
+
+<%- include("partials/header"); -%>
+<% if(loggedInUser){%>
+  <h1>Hello <%= loggedInUser%></h1>
+<%}else{%>
+   <h1>Home</h1>
+<%}%>
+
+    <p> <%= startingContent %> </p>
+    <h4><a href="/register">Sign Up</a></h4>
+<div class="container-fluid">
+  <div class="grid-container">
+
+      <%  posts.forEach(function(post){ %>
+          <div class="row card-border ">
+
+      <div class="col-md">
+
+       <div class="card">
+         <div class="card-body" >
+
+           <h4 class="card-title"><%=post.title%></h4>
+           <p class="card-text"><%=post.content.substring(0, 200) + " ..."%></p>
+              <a href="/post/<%=post._id%>">Read More</a>
+            <div class="card-footer">
+              <a id="usernamelink" href="/publicprofile/<%=post.username %>"><p class="post-date">by <%=post.username %></p></a>
+              <p class="post-date"><%=post.created %></p>
+
+            </div>
+         </div>
+         <div class="card-footer">
+             <i id="heart" class="far fa-heart" onclick=getLike(this)></i>
+
+        </div>
+         </div>
+       </div>
+
+      </div>
+
+        <% }) %>
+
+  </div>
+</div>
+
+
+
+<%- include("partials/footer"); -%>
